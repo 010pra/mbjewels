@@ -1,0 +1,310 @@
+/* ============================================================
+   SWARNA JEWELS — admin.css (MB Jewels Admin)
+   ============================================================ */
+
+:root {
+    --maroon: #4A0E1A;
+    --maroon-dark: #2F070F;
+    --gold: #C8922A;
+    --gold-light: #DFB254;
+    --cream: #FBF5EB;
+    --cream-dark: #F2E8D9;
+
+    --font-serif: "Cormorant", serif;
+    --font-sans: "Montserrat", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--cream);
+    color: var(--maroon-dark);
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* --- LOGIN SCREEN --- */
+#login-screen {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--maroon);
+}
+
+.login-box {
+    background: var(--cream);
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.login-box h2 {
+    font-family: var(--font-serif);
+    color: var(--maroon);
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-box p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 0.85rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+}
+
+.login-box .btn {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: var(--maroon);
+    color: var(--gold-light);
+    border: none;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-msg {
+    color: #d32f2f;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    height: 1rem;
+}
+
+/* --- DASHBOARD SCREEN --- */
+.admin-nav {
+    background: var(--maroon);
+    color: var(--gold-light);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-nav h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--gold-light);
+    color: var(--gold-light);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.dashboard-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+.admin-section {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--cream-dark);
+}
+
+.admin-section h3 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: var(--maroon);
+    border-bottom: 1px solid var(--cream-dark);
+    padding-bottom: 0.5rem;
+}
+
+/* --- FORMS --- */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: var(--maroon);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #e0d8cc;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    background: #fafafa;
+}
+
+.btn-gold {
+    background: var(--gold);
+    color: var(--maroon-dark);
+    font-weight: 600;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* --- TOGGLE SWITCH --- */
+.form-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #5CE87E;
+}
+
+input:checked+.slider:before {
+    transform: translateX(18px);
+}
+
+.slider.round {
+    border-radius: 22px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* --- TABLE --- */
+.table-container {
+    overflow-x: auto;
+}
+
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.products-table th,
+.products-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #e0d8cc;
+}
+
+.products-table th {
+    font-weight: 600;
+    color: #666;
+}
+
+.tbl-img {
+    width: 40px;
+    height: 40px;
+    background: var(--gold-light);
+    border-radius: 4px;
+}
+
+.badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.badge.active {
+    background: #d4f7e1;
+    color: #168e3f;
+}
+
+.badge.hidden {
+    background: #fcebeb;
+    color: #d32f2f;
+}
+
+.btn-edit {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--maroon);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+}

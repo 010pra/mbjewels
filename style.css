@@ -958,6 +958,27 @@ a {
 }
 
 /* ============================================================
+   LOADING & EMPTY STATES
+   ============================================================ */
+.loading-state,
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: var(--r-xl);
+  border: 1.5px dashed var(--gold-light);
+  font-family: var(--font-serif);
+  color: var(--text-muted);
+}
+
+.loading-state p,
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .footer {
