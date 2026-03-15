@@ -24,6 +24,7 @@ const loginScreen = document.getElementById('login-screen');
 const dashboardScreen = document.getElementById('dashboard-screen');
 const loginForm = document.getElementById('login-form');
 const logoutBtn = document.getElementById('logout-btn');
+const seedBtn = document.getElementById('seed-btn');
 const errorMsg = document.getElementById('login-error');
 const addProductForm = document.getElementById('add-product-form');
 const btnAddProduct = document.getElementById('btn-add-product');
@@ -43,18 +44,51 @@ onAuthStateChanged(auth, (user) => {
 
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
     errorMsg.textContent = 'Logging in...';
 
     signInWithEmailAndPassword(auth, email, password)
         .catch((error) => {
-            errorMsg.textContent = error.message;
+            console.error("Login Error:", error.code);
+            if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+                errorMsg.textContent = "Invalid email or password. Please check your credentials.";
+            } else if (error.code === 'auth/user-not-found') {
+                errorMsg.textContent = "Admin user not found. Did you create it in Firebase?";
+            } else {
+                errorMsg.textContent = "Login failed: " + error.message;
+            }
         });
 });
 
 logoutBtn.addEventListener('click', () => {
     signOut(auth);
+});
+
+// --- SEED MOCK DATA ---
+const mockProducts = [
+    { name: "Lakshmi Gaja Necklace Set", price: 4850, category: "necklaces", description: "Antique-finish temple design with ruby & emerald stones. Gajalakshmi pendant with elephant motifs and pearl drops.", imageUrl: "assets/necklace.png", visible: true, createdAt: Date.now() },
+    { name: "Peacock Temple Jhumkas", price: 1820, category: "earrings", description: "Intricate peacock design with antique finish, multi-coloured stones and delicate pearl drops.", imageUrl: "assets/earrings.png", visible: true, createdAt: Date.now() + 10 },
+    { name: "Nakshi Temple Bangle Set", price: 3200, category: "bangles", description: "Set of 4 bangles with intricate nakshi work, Lakshmi motif and coloured stone inlays.", imageUrl: "assets/bangles.png", visible: true, createdAt: Date.now() + 20 },
+    { name: "Lakshmi Chandramauli Tikka", price: 2480, category: "maangtikka", description: "Grand Lakshmi centre with peacock side motifs, ruby-emerald-pearl drops.", imageUrl: "assets/maangtikka.png", visible: true, createdAt: Date.now() + 30 }
+];
+
+seedBtn.addEventListener('click', async () => {
+    if (!confirm("This will add the 4 original products to your website. Proceed?")) return;
+    seedBtn.disabled = true;
+    seedBtn.textContent = "Seeding...";
+    try {
+        for (const p of mockProducts) {
+            await addDoc(collection(db, "products"), p);
+        }
+        alert("Mock data added! Refreshing list...");
+        loadProducts();
+    } catch (err) {
+        alert("Failed to seed: " + err.message);
+    } finally {
+        seedBtn.disabled = false;
+        seedBtn.textContent = "Load Mock Data";
+    }
 });
 
 // --- LOAD PRODUCTS ---
