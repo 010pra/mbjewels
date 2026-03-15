@@ -33,12 +33,12 @@ const productsTbody = document.getElementById('products-tbody');
 // --- AUTHENTICATION ---
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        loginScreen.classList.remove('active');
-        dashboardScreen.classList.add('active');
+        loginScreen.style.display = 'none';
+        dashboardScreen.style.display = 'block';
         loadProducts();
     } else {
-        dashboardScreen.classList.remove('active');
-        loginScreen.classList.add('active');
+        dashboardScreen.style.display = 'none';
+        loginScreen.style.display = 'flex';
     }
 });
 
